@@ -21,7 +21,7 @@ export interface ProjectFlowResult {
 export interface PostFlowAnswers {
   postTitle: string;
   postDescription: string;
-  Platform: string;
+  platform: string;
   postDate: string; // YYYY-MM-DD
 }
 
@@ -44,7 +44,6 @@ export interface NotionPostProperties {
 
 // GitHub
 export interface GitHubRepoProperties {
-  name: string;
   description?: string;
   private?: boolean;
 }
