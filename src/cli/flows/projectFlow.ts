@@ -11,16 +11,11 @@ import { pushToGitHub } from "../../services/gitops.js";
 import { createNotionEntry } from "../../services/notion/projectPage.js";
 import { createMinecraftFolder } from "./minecraftFlow.js";
 import { authorize, createFolder } from "../../services/drive/drive.js";
-import { getConfig } from "../../config.js";
+import { config } from "../../config.js";
 
 import { showMainMenu } from "../index.js";
 
-function getFlowConfig() {
-  return getConfig();
-}
-
 export async function projectFlow(): Promise<void> {
-  const config = getFlowConfig();
   console.log(chalk.cyan("\nNew Project\n"));
 
   // 1. Inquirer prompts
@@ -121,7 +116,9 @@ export async function projectFlow(): Promise<void> {
   );
   await pushToGitHub(projectPath, repoURL);
 
-  // 6. Create Google Drive Folders
+  // * * !----DRIVE INTEGRATION IS ON HOLD----!
+
+  /* 6. Create Google Drive Folders
   console.log(chalk.yellow("\nCreate new Google Drive folders..."));
   logger.info(`Create new Google Drive folders for ${projectName}`);
 
@@ -139,7 +136,7 @@ export async function projectFlow(): Promise<void> {
 
       resolve();
     });
-  });
+  }); */
 
   // 7. Finished
   logger.info(`Project ${projectName} created successfully.`);

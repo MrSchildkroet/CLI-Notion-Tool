@@ -4,16 +4,10 @@ import chalk from "chalk";
 import { google, drive_v3 } from "googleapis";
 
 import { logger } from "../../utils/logger.js";
-import { getConfig } from "../../config.js";
-
-function getDriveConfig() {
-  return getConfig();
-}
+import { config } from "../../config.js";
 
 // Authentification
 export async function authorize(callback: (auth: any) => void): Promise<void> {
-  const config = getDriveConfig();
-
   try {
     const credsPath = "./credentials.json";
 

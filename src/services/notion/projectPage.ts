@@ -1,20 +1,14 @@
 import { Client } from "@notionhq/client";
 import chalk from "chalk";
 
-import { getConfig } from "../../config.js";
+import { config } from "../../config.js";
 import { logger } from "../../utils/logger.js";
 import type { NotionProjectProperties } from "../../types/index.js";
-
-function getNotionProjectClient() {
-  const config = getConfig();
-  return new Client({ auth: config.notionKeyProjects });
-}
 
 export async function createNotionEntry(
   properties: NotionProjectProperties,
 ): Promise<void> {
-  const notion = getNotionProjectClient();
-  const config = getConfig();
+  const notion = new Client({ auth: config.notionKeyProjects });
 
   const { title, priority, repoURL, status, startDate, endDate } = properties;
 

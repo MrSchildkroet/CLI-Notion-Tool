@@ -29,14 +29,12 @@ function requireEnv(name: string): string {
   return value;
 }
 
-export function getConfig(): Config {
-  return {
-    notionKeyProjects: requireEnv("NOTION_KEY"),
-    notionKeySocialMedia: requireEnv("NOTION_KEY_SOCIAL_MEDIA"),
-    databaseIdProjects: requireEnv("DATABASE_ID"),
-    databaseIdSocialMedia: requireEnv("DATABASE_ID_SOCIAL_MEDIA"),
-    gitHubToken: requireEnv("GITHUB_TOKEN"),
-    googleCredsPath: requireEnv("GOOGLE_CREDS_PATH"),
-    projectsRootId: requireEnv("DRIVE_ROOT_ID"),
-  };
-}
+export const config: Config = {
+  notionKeyProjects: requireEnv("NOTION_KEY"),
+  notionKeySocialMedia: requireEnv("NOTION_KEY_SOCIAL_MEDIA"),
+  databaseIdProjects: requireEnv("DATABASE_ID"),
+  databaseIdSocialMedia: requireEnv("DATABASE_ID_SOCIAL_MEDIA"),
+  gitHubToken: requireEnv("GITHUB_TOKEN"),
+  googleCredsPath: requireEnv("GOOGLE_CREDS_PATH"),
+  projectsRootId: requireEnv("DRIVE_ROOT_ID"),
+};

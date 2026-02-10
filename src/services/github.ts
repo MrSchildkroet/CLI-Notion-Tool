@@ -1,22 +1,14 @@
 import { Octokit } from "@octokit/rest";
 import chalk from "chalk";
-import { getConfig } from "../config.js";
+import { config } from "../config.js";
 import { logger } from "../utils/logger.js";
 import type { GitHubRepoProperties, GitHubRepoResult } from "../types/index.js";
-
-function getOctokit() {
-  const config = getConfig();
-
-  return new Octokit({
-    auth: config.gitHubToken,
-  });
-}
 
 export async function createGitHubRepo(
   name: string,
   properties: GitHubRepoProperties,
 ): Promise<string> {
-  const octokit = getOctokit();
+  const octokit = new Octokit({ auth: config.gitHubToken });
 
   try {
     logger.info(`Create new GitHub Repo: ${name}`);
