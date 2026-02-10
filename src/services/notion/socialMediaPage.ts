@@ -1,17 +1,21 @@
 import { Client } from "@notionhq/client";
 import chalk from "chalk";
 
-import { config } from "../../config.js";
+import { getConfig } from "../../config.js";
 import { logger } from "../../utils/logger.js";
 import type { NotionPostProperties } from "../../types/index.js";
 
-const notion = new Client({
-  auth: config.notionKeySocialMedia,
-});
+function getNotionSocialClient() {
+  const config = getConfig();
+  return new Client({ auth: config.notionKeySocialMedia });
+}
 
 export async function createSocialMediaEntry(
   properties: NotionPostProperties,
 ): Promise<void> {
+  const notion = getNotionSocialClient();
+  const config = getConfig();
+
   const { title, description, platform, date } = properties;
 
   try {

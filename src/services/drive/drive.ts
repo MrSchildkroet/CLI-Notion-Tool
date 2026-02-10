@@ -4,12 +4,18 @@ import chalk from "chalk";
 import { google, drive_v3 } from "googleapis";
 
 import { logger } from "../../utils/logger.js";
-import { config } from "../../config.js";
+import { getConfig } from "../../config.js";
+
+function getDriveConfig() {
+  return getConfig();
+}
 
 // Authentification
-export function authorize(callback: (auth: any) => void): void {
+export async function authorize(callback: (auth: any) => void): Promise<void> {
+  const config = getDriveConfig();
+
   try {
-    const credsPath = config.googleCredsPath;
+    const credsPath = "./credentials.json";
 
     if (!fs.existsSync(credsPath)) {
       logger.fatal(`Google Credentials not found at: ${credsPath}`);
@@ -18,13 +24,23 @@ export function authorize(callback: (auth: any) => void): void {
 
     const credentials = fs.readJSONSync(credsPath, "utf8");
 
-    const auth = new google.auth.GoogleAuth({
-      credentials,
-      scopes: ["https://www.googleapis.com/auth/drive"],
-    });
+    const { client_id, client_secret, redirect_uris } = credentials.installed;
 
-    logger.info("Google Drive authorization successful.");
-    callback(auth);
+    const oAuth2Client = new google.auth.OAuth2(
+      client_id,
+      client_secret,
+      redirect_uris[0],
+    );
+
+    const tokenPath = "./token.json";
+
+    if (fs.existsSync(tokenPath)) {
+      const token = fs.readJSONSync(tokenPath, "utf8");
+      oAuth2Client.setCredentials(token);
+      logger.info("Google Drive authorization successful.");
+      callback(oAuth2Client);
+      return;
+    }
   } catch (err: unknown) {
     if (err instanceof Error) {
       logger.error(`Google Auth failed: ${err.message}`);

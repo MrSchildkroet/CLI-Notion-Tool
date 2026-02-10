@@ -3,7 +3,6 @@ import { promisify } from "util";
 import chalk from "chalk";
 
 import { logger } from "../../utils/logger.js";
-import { config } from "../../config.js";
 import type { PythonExportProperties } from "../../types/index.js";
 
 const execFileAsync = promisify(execFile);

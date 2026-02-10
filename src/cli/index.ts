@@ -13,7 +13,7 @@ export async function showMainMenu(): Promise<void> {
 
   const { action } = await inquirer.prompt<{ action: MainMenuAction }>([
     {
-      type: "list",
+      type: "select",
       name: "action",
       message: "Choose an action:",
       choices: [

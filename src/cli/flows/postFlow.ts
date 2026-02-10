@@ -23,7 +23,7 @@ export async function postFlow(): Promise<void> {
     {
       type: "input",
       name: "postDescription",
-      message: "Description of the Social Media Posts",
+      message: "Description of the Social Media Posts:",
       validate: (v) => v.length > 0 || "Please enter a description.",
     },
     {
@@ -35,8 +35,8 @@ export async function postFlow(): Promise<void> {
     {
       type: "input",
       name: "postDate", // YYYY-MM-DD
-      message: "Planed post date (YYYY-MM-DD):",
-      validate: (v) => /^\d{4}-\d{2}$/.test(v) || "Please enter a date.",
+      message: "Planed post date: YYYY-MM-DD",
+      validate: (v) => v.length > 0 || "Please enter a date.",
     },
   ]);
 

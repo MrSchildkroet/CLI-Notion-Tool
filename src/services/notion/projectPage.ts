@@ -1,17 +1,21 @@
 import { Client } from "@notionhq/client";
 import chalk from "chalk";
 
-import { config } from "../../config.js";
+import { getConfig } from "../../config.js";
 import { logger } from "../../utils/logger.js";
 import type { NotionProjectProperties } from "../../types/index.js";
 
-const notion = new Client({
-  auth: config.notionKeyProjects,
-});
+function getNotionProjectClient() {
+  const config = getConfig();
+  return new Client({ auth: config.notionKeyProjects });
+}
 
 export async function createNotionEntry(
   properties: NotionProjectProperties,
 ): Promise<void> {
+  const notion = getNotionProjectClient();
+  const config = getConfig();
+
   const { title, priority, repoURL, status, startDate, endDate } = properties;
 
   try {
@@ -19,19 +23,16 @@ export async function createNotionEntry(
     await notion.pages.create({
       parent: { database_id: config.databaseIdProjects },
       properties: {
-        Name: {
+        "Project name": {
           title: [{ text: { content: title } }],
         },
         Priority: {
           select: { name: priority },
         },
-        Status: {
-          select: { name: status },
-        },
-        "Start Date": {
+        "Start date": {
           date: { start: startDate },
         },
-        "End Date": {
+        "End date": {
           date: { start: endDate },
         },
         URL: {

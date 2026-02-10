@@ -11,11 +11,16 @@ import { pushToGitHub } from "../../services/gitops.js";
 import { createNotionEntry } from "../../services/notion/projectPage.js";
 import { createMinecraftFolder } from "./minecraftFlow.js";
 import { authorize, createFolder } from "../../services/drive/drive.js";
-import { config } from "../../config.js";
+import { getConfig } from "../../config.js";
 
 import { showMainMenu } from "../index.js";
 
+function getFlowConfig() {
+  return getConfig();
+}
+
 export async function projectFlow(): Promise<void> {
+  const config = getFlowConfig();
   console.log(chalk.cyan("\nNew Project\n"));
 
   // 1. Inquirer prompts
@@ -43,7 +48,7 @@ export async function projectFlow(): Promise<void> {
       choices: [
         { name: "Not Started", value: "Not started" },
         { name: "In Progress", value: "In progress" },
-        { name: "Done", value: "Done" },
+        { name: "Done", value: "Completed" },
       ],
     },
     {
@@ -70,6 +75,18 @@ export async function projectFlow(): Promise<void> {
   const { projectName, priority, status, endDate, projectPath } = answers;
 
   const startDate = new Date().toISOString();
+
+  // Test if projectPath exists
+  if (!fs.existsSync(projectPath)) {
+    console.log(
+      chalk.yellow("Project folder does not exist. Creating folder..."),
+    );
+    logger.warn(
+      `Project folder: ${projectPath} does not exist. Creating project folder.`,
+    );
+
+    fs.mkdirpSync(projectPath);
+  }
 
   // 2. Create GitHub Repo
   console.log(chalk.yellow("\nCreate new GitHub Repository..."));
