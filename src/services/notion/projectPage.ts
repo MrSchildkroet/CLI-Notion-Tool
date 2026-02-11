@@ -5,12 +5,10 @@ import { config } from "../../config.js";
 import { logger } from "../../utils/logger.js";
 import type { NotionProjectProperties } from "../../types/index.js";
 
-export async function createNotionEntry(
-  properties: NotionProjectProperties,
-): Promise<void> {
+export async function createNotionEntry(properties: NotionProjectProperties): Promise<void> {
   const notion = new Client({ auth: config.notionKeyProjects });
 
-  const { title, priority, repoURL, status, startDate, endDate } = properties;
+  const { title, priority, repoURL, startDate, endDate } = properties;
 
   try {
     logger.info(`Creating new Notion Project-entry: ${title}`);
@@ -39,9 +37,7 @@ export async function createNotionEntry(
     logger.info(`Notion entry successfully created: ${title}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(
-        `Error occurred trying to create Notion entry: ${err.message}`,
-      );
+      logger.error(`Error occurred trying to create Notion entry: ${err.message}`);
       console.log(chalk.red("Error occurred trying to create Notion entry"));
     }
 

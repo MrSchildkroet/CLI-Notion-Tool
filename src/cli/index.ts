@@ -7,7 +7,23 @@ import { projectFlow } from "./flows/projectFlow.js";
 import { postFlow } from "./flows/postFlow.js";
 import { showSettings } from "./settings.js";
 
+function printBanner(): void {
+  console.log(
+    chalk.greenBright(`
+      $$\      $$\  $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\  
+      $$$\    $$$ |$$  __$$\ $$  __$$\ $$  __$$\ $$  __$$\ 
+      $$$$\  $$$$ |$$ /  \__|$$ /  \__|$$ /  \__|$$ /  \__|
+      $$\$$\$$ $$ |\$$$$$$\  \$$$$$$\  $$ |$$$$\ \$$$$$$\  
+      $$ \$$$  $$ | \____$$\  \____$$\ $$ |\_$$ | \____$$\ 
+      $$ |\$  /$$ |$$\   $$ |$$\   $$ |$$ |  $$ |$$\   $$ |
+      $$ | \_/ $$ |\$$$$$$  |\$$$$$$  |\$$$$$$  |\$$$$$$  |
+      \__|     \__| \______/  \______/  \______/  \______/ 
+    `),
+  );
+}
+
 export async function showMainMenu(): Promise<void> {
+  printBanner();
   console.log(chalk.cyan.bold("Notion CLI"));
   console.log(chalk.gray("Automate your Notion tasks with ease!"));
 

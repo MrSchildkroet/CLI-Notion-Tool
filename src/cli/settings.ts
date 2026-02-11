@@ -1,5 +1,7 @@
 import chalk from "chalk";
+
 import { config } from "../config.js";
+
 import { showMainMenu } from "./index.js";
 
 export async function showSettings(): Promise<void> {

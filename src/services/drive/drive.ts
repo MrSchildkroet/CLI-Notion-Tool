@@ -1,13 +1,12 @@
 import fs from "fs-extra";
-import path from "path";
 import chalk from "chalk";
-import { google, drive_v3 } from "googleapis";
+import { google } from "googleapis";
+import type { OAuth2Client } from "google-auth-library";
 
 import { logger } from "../../utils/logger.js";
-import { config } from "../../config.js";
 
 // Authentification
-export async function authorize(callback: (auth: any) => void): Promise<void> {
+export async function authorize(callback: (auth: OAuth2Client) => void): Promise<void> {
   try {
     const credsPath = "./credentials.json";
 
@@ -20,11 +19,7 @@ export async function authorize(callback: (auth: any) => void): Promise<void> {
 
     const { client_id, client_secret, redirect_uris } = credentials.installed;
 
-    const oAuth2Client = new google.auth.OAuth2(
-      client_id,
-      client_secret,
-      redirect_uris[0],
-    );
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
     const tokenPath = "./token.json";
 
@@ -46,7 +41,7 @@ export async function authorize(callback: (auth: any) => void): Promise<void> {
 
 // Creating folder
 export async function createFolder(
-  auth: any,
+  auth: OAuth2Client,
   folderName: string,
   parentFolderId: string,
 ): Promise<string> {
@@ -76,9 +71,7 @@ export async function createFolder(
     return folderId;
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(
-        `Error occurred trying to create Drive folder: ${err.message}`,
-      );
+      logger.error(`Error occurred trying to create Drive folder: ${err.message}`);
       console.log(chalk.red("Error occurred trying to create Drive folder."));
     }
 

@@ -4,6 +4,10 @@
   "description": "This Tol makes it easy, to integrate Notion with other Tools like GitHub, Git and Google Drive",
   "main": "dist/bin/cli.js",
   "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src/bin/cli.ts --format esm --dts --out-dir dist",
     "start": "node dist/cli.js"
@@ -29,6 +33,13 @@
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.9",
     "@types/node": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"

@@ -1,19 +1,15 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 import fs from "fs-extra";
-import path from "path";
 
 import type { ProjectFlowAnswers } from "../../types/index.js";
-
 import { logger } from "../../utils/logger.js";
 import { createGitHubRepo } from "../../services/github.js";
 import { pushToGitHub } from "../../services/gitops.js";
 import { createNotionEntry } from "../../services/notion/projectPage.js";
-import { createMinecraftFolder } from "./minecraftFlow.js";
-import { authorize, createFolder } from "../../services/drive/drive.js";
-import { config } from "../../config.js";
-
 import { showMainMenu } from "../index.js";
+
+import { createMinecraftFolder } from "./minecraftFlow.js";
 
 export async function projectFlow(): Promise<void> {
   console.log(chalk.cyan("\nNew Project\n"));
@@ -50,8 +46,7 @@ export async function projectFlow(): Promise<void> {
       type: "input",
       name: "endDate",
       message: "Deadline of the Project:",
-      validate: (v) =>
-        v.length > 0 || "Please enter a deadline in the format: YYYY-MM-DD.",
+      validate: (v) => v.length > 0 || "Please enter a deadline in the format: YYYY-MM-DD.",
     },
     {
       type: "input",
@@ -73,12 +68,8 @@ export async function projectFlow(): Promise<void> {
 
   // Test if projectPath exists
   if (!fs.existsSync(projectPath)) {
-    console.log(
-      chalk.yellow("Project folder does not exist. Creating folder..."),
-    );
-    logger.warn(
-      `Project folder: ${projectPath} does not exist. Creating project folder.`,
-    );
+    console.log(chalk.yellow("Project folder does not exist. Creating folder..."));
+    logger.warn(`Project folder: ${projectPath} does not exist. Creating project folder.`);
 
     fs.mkdirpSync(projectPath);
   }
@@ -111,12 +102,12 @@ export async function projectFlow(): Promise<void> {
 
   // 5. Push to GitHub
   console.log(chalk.yellow("\nPushing local Project to GitHub..."));
-  logger.info(
-    `Pushing local Project ${projectName} (${projectPath}) to GitHub`,
-  );
+  logger.info(`Pushing local Project ${projectName} (${projectPath}) to GitHub`);
   await pushToGitHub(projectPath, repoURL);
 
   // * * !----DRIVE INTEGRATION IS ON HOLD----!
+  // ! PROBLEM
+  // ? Problem is unknown
 
   /* 6. Create Google Drive Folders
   console.log(chalk.yellow("\nCreate new Google Drive folders..."));

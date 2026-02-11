@@ -1,6 +1,7 @@
 import { execSync } from "child_process";
-import fs from "fs-extra";
 import path from "path";
+
+import fs from "fs-extra";
 import chalk from "chalk";
 
 import { logger } from "../utils/logger.js";
@@ -30,32 +31,23 @@ function safeRun(command: string, cwd: string) {
 function createGitignore(projectPath: string): void {
   console.log(chalk.yellow("Creating .gitignore..."));
 
-  const content = [
-    GITIGNORE_CONTENT,
-    "*.mcpack",
-    "*.mcworld",
-    "*.mcfunction",
-    "*.mcaddon",
-  ].join("\n");
+  const content = [GITIGNORE_CONTENT, "*.mcpack", "*.mcworld", "*.mcfunction", "*.mcaddon"].join(
+    "\n",
+  );
   try {
     const gitignorePath = path.join(projectPath, ".gitignore");
     fs.writeFileSync(gitignorePath, content.trim());
     logger.info(`.gitignore created successfully: ${gitignorePath}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(
-        `Error occurred trying to create .gitignore: ${err.message}`,
-      );
+      logger.error(`Error occurred trying to create .gitignore: ${err.message}`);
     }
 
     throw new Error("An error occurred trying to create .gitignore.");
   }
 }
 
-export async function pushToGitHub(
-  projectPath: string,
-  repoURL: string,
-): Promise<void> {
+export async function pushToGitHub(projectPath: string, repoURL: string): Promise<void> {
   try {
     execSync("git --version", { stdio: "ignore" });
   } catch {

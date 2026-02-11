@@ -1,14 +1,13 @@
-import fs from "fs-extra";
 import path from "path";
 import os from "os";
+
+import fs from "fs-extra";
 import chalk from "chalk";
 
 import type { MinecraftFolderOptions } from "../../types/index.js";
 import { logger } from "../../utils/logger.js";
 
-export function createMinecraftFolder({
-  projectName,
-}: MinecraftFolderOptions): void {
+export function createMinecraftFolder({ projectName }: MinecraftFolderOptions): void {
   const basePath = path.join(
     os.homedir(),
     "AppData",
@@ -32,11 +31,7 @@ export function createMinecraftFolder({
     logger.info(`Minecraft BP Ordner erstellt: ${projectBP}`);
     logger.info(`Minecraft RP Ordner erstellt: ${projectRP}`);
 
-    console.log(
-      chalk.green(
-        `Minecraft folders for "${projectName}" created successfully. `,
-      ),
-    );
+    console.log(chalk.green(`Minecraft folders for "${projectName}" created successfully. `));
   } catch (err) {
     logger.error(`Error creating Minecraft folders: ${err}`);
     console.log(chalk.red("Error creating Minecraft folders."));

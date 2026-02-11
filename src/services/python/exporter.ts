@@ -1,5 +1,6 @@
 import { execFile } from "child_process";
 import { promisify } from "util";
+
 import chalk from "chalk";
 
 import { logger } from "../../utils/logger.js";
@@ -7,9 +8,7 @@ import type { PythonExportProperties } from "../../types/index.js";
 
 const execFileAsync = promisify(execFile);
 
-export async function runPythonExport(
-  properties: PythonExportProperties,
-): Promise<void> {
+export async function runPythonExport(properties: PythonExportProperties): Promise<void> {
   const { title, platform, date } = properties;
 
   logger.info(`Starting Python export: ${title}`);

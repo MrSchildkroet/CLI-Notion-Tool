@@ -2,11 +2,9 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 
 import type { PostFlowAnswers } from "../../types/index.js";
-
 import { logger } from "../../utils/logger.js";
 import { createSocialMediaEntry } from "../../services/notion/socialMediaPage.js";
 import { runPythonExport } from "../../services/python/exporter.js";
-
 import { showMainMenu } from "../index.js";
 
 export async function postFlow(): Promise<void> {
