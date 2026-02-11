@@ -29,3 +29,10 @@ export class GitError extends AppError {
     super("[GIT_ERROR]", message, details);
   }
 }
+
+// Python Error
+export class PythonError extends AppError {
+  constructor(message: string, details?: unknown) {
+    super("[PYTHON_ERROR]", message, details);
+  }
+}

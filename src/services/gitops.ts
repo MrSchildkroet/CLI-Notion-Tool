@@ -6,6 +6,8 @@ import chalk from "chalk";
 
 import { logger } from "../utils/logger.js";
 import { GITIGNORE_CONTENT } from "../constants.js";
+import { GitError } from "../types/errors.js";
+import { runPreCommitChecks } from "../utils/precommit.js";
 
 function run(command: string, cwd: string) {
   try {
@@ -40,10 +42,10 @@ function createGitignore(projectPath: string): void {
     logger.info(`.gitignore created successfully: ${gitignorePath}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(`Error occurred trying to create .gitignore: ${err.message}`);
+      throw new GitError(err.message, err);
     }
 
-    throw new Error("An error occurred trying to create .gitignore.");
+    throw new GitError("Unknown Git error", err);
   }
 }
 
@@ -56,6 +58,7 @@ export async function pushToGitHub(projectPath: string, repoURL: string): Promis
   }
 
   try {
+    runPreCommitChecks();
     logger.info(`Starting Git Push for Project: ${projectPath}`);
 
     if (!fs.existsSync(projectPath)) {

@@ -8,6 +8,7 @@ import { createGitHubRepo } from "../../services/github.js";
 import { pushToGitHub } from "../../services/gitops.js";
 import { createNotionEntry } from "../../services/notion/projectPage.js";
 import { showMainMenu } from "../index.js";
+import { AppError } from "../../types/errors.js";
 
 import { createMinecraftFolder } from "./minecraftFlow.js";
 
@@ -84,26 +85,44 @@ export async function projectFlow(): Promise<void> {
   console.log(chalk.yellow("\nCreate new Notion entry..."));
   logger.info(`Creating new Notion entry for ${projectName}`);
 
-  await createNotionEntry({
-    title: projectName,
-    priority,
-    repoURL,
-    status,
-    startDate,
-    endDate,
-  });
+  try {
+    await createNotionEntry({
+      title: projectName,
+      priority,
+      repoURL,
+      status,
+      startDate,
+      endDate,
+    });
+  } catch (err: unknown) {
+    if (err instanceof AppError) {
+      logger.error(`[${err.code} ${err.message}]`);
+      return;
+    }
+
+    logger.error(`Unknown error: ${err}`);
+  }
 
   // 4. Create Minecraft Folders (optional)
   if (answers.createMinecraftFolder) {
     console.log(chalk.yellow("\nCreate Minecraft Folders..."));
-    createMinecraftFolder({ projectName });
     logger.info(`Creating Minecraft folders for ${projectName}`);
+    createMinecraftFolder({ projectName });
   }
 
   // 5. Push to GitHub
   console.log(chalk.yellow("\nPushing local Project to GitHub..."));
   logger.info(`Pushing local Project ${projectName} (${projectPath}) to GitHub`);
-  await pushToGitHub(projectPath, repoURL);
+  try {
+    await pushToGitHub(projectPath, repoURL);
+  } catch (err: unknown) {
+    if (err instanceof AppError) {
+      logger.error(`[${err.code}]  ${err.message}`);
+      return;
+    }
+
+    logger.error(`Unknown error: ${err}`);
+  }
 
   // * * !----DRIVE INTEGRATION IS ON HOLD----!
   // ! PROBLEM

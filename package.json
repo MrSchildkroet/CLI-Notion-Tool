@@ -1,19 +1,18 @@
 {
   "name": "cli-notion-tool",
   "version": "1.0.0",
-  "description": "This Tol makes it easy, to integrate Notion with other Tools like GitHub, Git and Google Drive",
+  "description": "This Tool makes it easy, to integrate Notion with other Tools like GitHub, Git and Google Drive",
   "main": "dist/bin/cli.js",
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src/bin/cli.ts --format esm --dts --out-dir dist",
     "start": "node dist/cli.js"
   },
   "author": "MrSchildkroet",
-  "license": "ISC",
+  "license": "CC-BY-NC-4.0",
   "bin": {
     "notion-cli": "dist/cli.js"
   },
@@ -23,6 +22,7 @@
     "@octokit/rest": "^22.0.1",
     "chalk": "^5.6.2",
     "dotenv": "^17.2.4",
+    "execa": "^9.6.1",
     "fs-extra": "^11.3.3",
     "googleapis": "^171.4.0",
     "inquirer": "^13.2.2",

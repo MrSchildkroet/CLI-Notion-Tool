@@ -6,6 +6,7 @@ import { logger } from "../../utils/logger.js";
 import { createSocialMediaEntry } from "../../services/notion/socialMediaPage.js";
 import { runPythonExport } from "../../services/python/exporter.js";
 import { showMainMenu } from "../index.js";
+import { AppError } from "../../types/errors.js";
 
 export async function postFlow(): Promise<void> {
   console.log(chalk.cyan("\nNew Social Media Post\n"));
@@ -44,22 +45,40 @@ export async function postFlow(): Promise<void> {
   console.log(chalk.yellow("\n Creating new Notion entry..."));
   logger.info(`Creating new Social Media Notion entry: ${postTitle}`);
 
-  await createSocialMediaEntry({
-    title: postTitle,
-    description: postDescription,
-    platform: platform,
-    date: postDate,
-  });
+  try {
+    await createSocialMediaEntry({
+      title: postTitle,
+      description: postDescription,
+      platform: platform,
+      date: postDate,
+    });
+  } catch (err: unknown) {
+    if (err instanceof AppError) {
+      logger.error(`[${err.code}] ${err.message}`);
+      return;
+    }
+
+    logger.error(`Unknown error: ${err}`);
+  }
 
   // 3. Python export
   console.log(chalk.yellow("Exporting to Excel..."));
   logger.info(`Starting Python export to Excel for: ${postTitle}`);
 
-  await runPythonExport({
-    title: postTitle,
-    platform: platform,
-    date: postDate,
-  });
+  try {
+    await runPythonExport({
+      title: postTitle,
+      platform: platform,
+      date: postDate,
+    });
+  } catch (err: unknown) {
+    if (err instanceof AppError) {
+      logger.error(`[${err.code}] ${err.message}`);
+      return;
+    }
+
+    logger.error(`Unknown error: ${err}`);
+  }
 
   // 4. Finished
   console.log(chalk.green("\nSocial Media Post created successfully."));

@@ -4,6 +4,7 @@ import chalk from "chalk";
 import { config } from "../config.js";
 import { logger } from "../utils/logger.js";
 import type { GitHubRepoProperties } from "../types/index.js";
+import { GitHubError } from "../types/errors.js";
 
 export async function createGitHubRepo(
   name: string,
@@ -28,10 +29,9 @@ export async function createGitHubRepo(
     return repoURL;
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(`Error ocurred trying to create GitHub Repository: ${err.message}`);
-      console.log(chalk.red("Error ocurred trying to create GitHub Repository."));
+      throw new GitHubError(err.message, err);
     }
 
-    throw err;
+    throw new GitHubError("Unknown GitHub error", err);
   }
 }

@@ -6,6 +6,7 @@ import chalk from "chalk";
 
 import type { MinecraftFolderOptions } from "../../types/index.js";
 import { logger } from "../../utils/logger.js";
+import { AppError } from "../../types/errors.js";
 
 export function createMinecraftFolder({ projectName }: MinecraftFolderOptions): void {
   const basePath = path.join(
@@ -32,8 +33,12 @@ export function createMinecraftFolder({ projectName }: MinecraftFolderOptions): 
     logger.info(`Minecraft RP Ordner erstellt: ${projectRP}`);
 
     console.log(chalk.green(`Minecraft folders for "${projectName}" created successfully. `));
-  } catch (err) {
-    logger.error(`Error creating Minecraft folders: ${err}`);
-    console.log(chalk.red("Error creating Minecraft folders."));
+  } catch (err: unknown) {
+    if (err instanceof AppError) {
+      logger.error(`[${err.code}] ${err.message}`);
+      return;
+    }
+
+    logger.error(`Unknown error: ${err}`);
   }
 }

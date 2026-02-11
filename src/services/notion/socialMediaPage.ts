@@ -4,6 +4,7 @@ import chalk from "chalk";
 import { config } from "../../config.js";
 import { logger } from "../../utils/logger.js";
 import type { NotionPostProperties } from "../../types/index.js";
+import { NotionError } from "../../types/errors.js";
 
 export async function createSocialMediaEntry(properties: NotionPostProperties): Promise<void> {
   const notion = new Client({ auth: config.notionKeySocialMedia });
@@ -35,10 +36,9 @@ export async function createSocialMediaEntry(properties: NotionPostProperties): 
     logger.info(`Social Media Notion entry successfully created: ${title}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      logger.error(`Error occurred trying to create Social Media Notion entry: ${err.message}`);
-      console.log(chalk.red("Error occurred trying to create Social Media Notion entry."));
+      throw new NotionError(err.message, err);
     }
 
-    throw err;
+    throw new NotionError("Unknown Notion error", err);
   }
 }
