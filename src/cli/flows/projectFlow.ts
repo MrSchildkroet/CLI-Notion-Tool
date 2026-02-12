@@ -124,7 +124,7 @@ export async function projectFlow(): Promise<void> {
     logger.error(`Unknown error: ${err}`);
   }
 
-  // * * !----DRIVE INTEGRATION IS ON HOLD----!
+  // * * Google Drive integration is temporarily disabled.
   // ! PROBLEM
   // ? Problem is unknown
 
@@ -136,7 +136,7 @@ export async function projectFlow(): Promise<void> {
   let driveFolderId: string | undefined;
 
   await new Promise<void>((resolve) => {
-    authorize(async (auth: any) => {
+    authorize(async (auth: OAuth2Client) => {
       driveFolderId = await createFolder(auth, projectName, projectsRootID);
 
       fs.writeFileSync(

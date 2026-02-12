@@ -18,8 +18,8 @@ We want to create a welcoming, friendly and respectful environment for everyone 
 - Aggressive or disrespectful communication
 
 ## Reporting Issues
-If you experience or witness unacceptable behavior, please report it privatly:
-- Email: [Contact me↗[Email]](mailto:MrSchildkroet@outlook.de)
+If you experience or witness unacceptable behavior, please report it privately:
+- Email: [Contact me↗](mailto:MrSchildkroet@outlook.de)
 
 All reports will be handled confidentially.
 

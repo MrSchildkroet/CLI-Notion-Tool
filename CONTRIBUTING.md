@@ -10,7 +10,7 @@ If you find a bug or want to request a feature:
 
 1. Check if an issue already exists.
 2. Create a new issue with:
-    - a clear discription
+    - a clear description
     - steps to reproduce
     - expected behavior
     - environment info (Node version, OS, etc.)

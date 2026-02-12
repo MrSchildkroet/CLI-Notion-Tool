@@ -8,16 +8,19 @@ export async function showSettings(): Promise<void> {
   console.log("\n" + chalk.cyan.bold("Current Settings:\n"));
 
   const settings = [
-    { label: "GitHub Token", value: config.gitHubToken },
-    { label: "Notion Key (Projects)", value: config.notionKeyProjects },
+    { label: "GitHub Token", value: config.gitHubToken ? "****...****" : "MISSING" },
+    { label: "Notion Key (Projects)", value: config.notionKeyProjects ? "****...****" : "MISSING" },
     {
       label: "Notion Database ID (Projects)",
-      value: config.databaseIdProjects,
+      value: config.databaseIdProjects ? "****...****" : "MISSING",
     },
-    { label: "Notion Key (Social Media)", value: config.notionKeySocialMedia },
+    {
+      label: "Notion Key (Social Media)",
+      value: config.notionKeySocialMedia ? "****...****" : "MISSING",
+    },
     {
       label: "Database ID (Social Media)",
-      value: config.databaseIdSocialMedia,
+      value: config.databaseIdSocialMedia ? "****...****" : "MISSING",
     },
   ];
 
