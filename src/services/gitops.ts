@@ -7,7 +7,6 @@ import chalk from "chalk";
 import { logger } from "../utils/logger.js";
 import { GITIGNORE_CONTENT } from "../constants.js";
 import { GitError } from "../types/errors.js";
-import { runPreCommitChecks } from "../utils/precommit.js";
 
 function run(command: string, cwd: string) {
   try {
@@ -58,7 +57,6 @@ export async function pushToGitHub(projectPath: string, repoURL: string): Promis
   }
 
   try {
-    runPreCommitChecks();
     logger.info(`Starting Git Push for Project: ${projectPath}`);
 
     if (!fs.existsSync(projectPath)) {
