@@ -1,68 +1,68 @@
 # CLI Notion Tool
 
-**Ein leistungsstarkes Kommandozeilen-Werkzeug zur Automatisierung und Integration von Notion mit GitHub, Google Drive und Git.**
+**A powerful command-line tool for automating and integrating Notion with GitHub, Google Drive, and Git.**
 
 ---
 
-## Inhaltsverzeichnis
+## Table of Contents
 
-- [Überblick](#überblick)
+- [Overview](#overview)
 - [Features](#-features)
 - [Installation](#-installation)
-- [Konfiguration](#-konfiguration)
-- [Nutzung](#-nutzung)
-- [Projektstruktur](#-projektstruktur)
-- [Häufige Fehler & Lösungen](#-häufige-fehler--lösungen)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Common Errors & Solutions](#-common-errors--solutions)
 - [Debugging](#-debugging)
-- [Lizenz](#-lizenz)
+- [License](#-license)
 - [Changelog](#-changelog)
 
 ---
 
-## Überblick
+## Overview
 
-Das **CLI Notion Tool** ist eine spezialisierte Anwendung, die folgende Integrationen ermöglicht:
+The **CLI Notion Tool** is a specialized application that enables the following integrations:
 
-- **Notion-Integration**: Erstelle und verwalte Notion-Datenbankeinträge automatisch
-- **GitHub-Integration**: Verbinde Notion-Projekte mit GitHub-Repositories
-- **Google Drive-Integration**: Strukturiere automatisch Google Drive-Ordner für neue Projekte
-- **Git-Automatisierung**: Richte Git-Repositories mit standardisierten Konfigurationen ein
-- **Minecraft-Support**: Erstelle automatisch Minecraft Bedrock Project-Strukturen
+- **Notion Integration**: Create and manage Notion database entries automatically
+- **GitHub Integration**: Connect Notion projects with GitHub repositories
+- **Google Drive Integration**: Automatically create Google Drive folder structures for new projects
+- **Git Automation**: Set up Git repositories with standardized configurations
+- **Minecraft Support**: Automatically create Minecraft Bedrock BP & RP folders
 
-Das Tool stellt eine interaktive CLI-Menüführung bereit, mit der Benutzer neue Projekte, Social-Media-Posts und andere Inhalte verwalten können.
+The tool provides an interactive CLI menu interface that allows users to manage new projects, social media posts, and other content.
 
 **Version**: 1.0.0  
-**Lizenz**: [Attribution-NonCommercial 4.0 International](./LICENSE.txt)  
-**Autor**: MrSchildkroet
+**License**: [Attribution-NonCommercial 4.0 International](./LICENSE.txt)  
+**Author**: MrSchildkroet
 
 ---
 
 ## Features
 
-- ✅ **Notion Datenbankanbindung** – Projekte und Social-Media-Posts verwalten
-- ✅ **GitHub Repository-Automation** – Automatische Erstellung und Konfiguration
-- ✅ **Google Drive-Integration** – Projektordner-Strukturen erstellen
-- ✅ **Interaktive CLI** – Benutzerfreundliche Menüführung mit Inquirer.js
-- ✅ **Git-Unterstützung** – Automatische Repository-Initialisierung
-- ✅ **Minecraft Bedrock-Projektstuktur** – Vordefinierte Folder-Strukturen
-- ✅ **Logging-System** – Detaillierte Logs für Debugging
-- ✅ **Konfigurierbar** – Vollständige Umgebungsvariablen-Unterstützung
-- ℹ️ **Google Drive Service** – Derzeit deaktiviert (siehe Changelog)
+- ✅ **Notion Database Binding** – Manage projects and social media posts
+- ✅ **GitHub Repository Automation** – Automatic creation and configuration
+- ✅ **Google Drive Integration** – Create project folder structures
+- ✅ **Interactive CLI** – User-friendly menu navigation with Inquirer.js
+- ✅ **Git Support** – Automatic repository initialization
+- ✅ **Minecraft Bedrock BP & RP Folders** – Predefined folder structures
+- ✅ **Logging System** – Detailed logs for debugging
+- ✅ **Configurable** – Full environment variable support
+- ℹ️ **Google Drive Service** – Currently disabled (see Changelog)
 
 ---
 
 ## Installation
 
-### Voraussetzungen
+### Prerequisites
 
-- **Node.js** 18+ (empfohlen: 20 LTS)
-- **npm** oder **pnpm**
-- Git (für Repository-Operationen)
-- **.env-Datei** mit erforderlichen Umgebungsvariablen
+- **Node.js** 18+ (recommended: 20 LTS)
+- **npm** or **pnpm**
+- Git (for repository operations)
+- **.env file** with required environment variables
 
-### Schritt-für-Schritt
+### Step-by-Step
 
-1. **Abhängigkeiten installieren**:
+1. **Install dependencies**:
 
    **Shell (Bash/Zsh – Linux/macOS)**
 
@@ -76,23 +76,23 @@ Das Tool stellt eine interaktive CLI-Menüführung bereit, mit der Benutzer neue
    npm install
    ```
 
-2. **Umgebungsvariablen einrichten** (siehe [Konfiguration](#-konfiguration)):
+2. **Set up environment variables** (see [Configuration](#-configuration)):
 
    **Shell (Bash/Zsh – Linux/macOS)**
 
    ```bash
    cp .env.example .env
-   # Bearbeite die .env-Datei mit deinen API-Keys
+   # Edit the .env file with your API keys
    ```
 
    **PowerShell (Windows)**
 
    ```powershell
    Copy-Item -Path .env.example -Destination .env
-   # Bearbeite die .env-Datei mit deinen API-Keys
+   # Edit the .env file with your API keys
    ```
 
-3. **TypeScript kompilieren**:
+3. **Compile TypeScript**:
 
    **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
@@ -100,7 +100,7 @@ Das Tool stellt eine interaktive CLI-Menüführung bereit, mit der Benutzer neue
    npm run build
    ```
 
-4. **Tool verfügbar machen** (Optional – als globales npm-Kommando):
+4. **Make tool available as a command** (Optional – as a global npm command):
 
    **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
@@ -110,64 +110,64 @@ Das Tool stellt eine interaktive CLI-Menüführung bereit, mit der Benutzer neue
 
 ---
 
-## Konfiguration
+## Configuration
 
-### Erforderliche Umgebungsvariablen
+### Required Environment Variables
 
-Die Datei `.env` muss folgende Variablen enthalten:
+The `.env` file must contain the following variables:
 
 ```env
-# Notion API Keys (für Projekte und Social Media)
+# Notion API Keys (for projects and social media)
 NOTION_KEY=<YOUR_NOTION_KEY>
 NOTION_KEY_SOCIAL_MEDIA=<YOUR_NOTION_KEY_SOCIAL_MEDIA_DATABASE>
 
-# Notion Datenbank-IDs
+# Notion Database IDs
 DATABASE_ID=<YOUR_DATABASE_ID>
 DATABASE_ID_SOCIAL_MEDIA=<YOUR_DATABASE_ID_SOCIAL_MEDIA_DATABASE>
 
 # GitHub Personal Access Token
 GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 
-# Google Drive Anmeldeinformationen
+# Google Drive Credentials
 GOOGLE_CREDS_PATH=/path/to/google/credentials.json
 
-# Google Drive Projekt-Root-Ordner ID
+# Google Drive Project Root Folder ID
 DRIVE_ROOT_ID=<YOUR_DRIVE_FOLDER_ROOT_ID>
 ```
 
-### Beschaffung der API-Keys
+### Obtaining API Keys
 
 #### Notion API Key
 
-1. Gehe zu [notion.com/my-integrations](https://www.notion.com/my-integrations)
-2. Erstelle eine neue Integration
-3. Kopiere den "Internal Integration Token"
+1. Go to [notion.com/my-integrations](https://www.notion.com/my-integrations)
+2. Create a new integration
+3. Copy the "Internal Integration Token"
 
-#### Notion Datenbank-IDs
+#### Notion Database IDs
 
-1. Öffne die Datenbank in Notion
-2. Die ID ist in der Browser-URL nach dem `/` enthalten
-3. Mit der ID des Datenbankeintrags beginnt die ID
+1. Open the database in Notion
+2. The ID is in the browser URL after the `/`
+3. The database entry ID begins with the ID
 
 #### GitHub Token
 
-1. Gehe zu [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Generiere einen neuen Token (Classic oder Fine-grained)
-3. Erforderliche Scopes: `repo`, `user`
+1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Generate a new token (Classic or Fine-grained)
+3. Required scopes: `repo`, `user`
 
 #### Google Drive Credentials
 
-1. Gehe zu [Google Cloud Console](https://console.cloud.google.com)
-2. Erstelle ein neues Projekt
-3. Aktiviere die Google Drive API
-4. Erstelle einen Service Account und lade die JSON-Datei herunter
-5. Setze `GOOGLE_CREDS_PATH` auf den Pfad zur JSON-Datei
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project
+3. Enable the Google Drive API
+4. Create a Service Account and download the JSON file
+5. Set `GOOGLE_CREDS_PATH` to the path of the JSON file
 
 ---
 
-## Nutzung
+## Usage
 
-### Starten mit npm
+### Starting with npm
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
@@ -175,7 +175,7 @@ DRIVE_ROOT_ID=<YOUR_DRIVE_FOLDER_ROOT_ID>
 npm start
 ```
 
-### Als globales Kommando (nach Installation)
+### As a global command (after installation)
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
@@ -183,187 +183,189 @@ npm start
 notion-cli
 ```
 
-### Hauptmenü-Optionen
+### Main Menu Options
 
 ```
 Notion CLI
 Automate your Notion tasks with ease!
 
-► New Project               – Erstelle ein neues Projekt mit Notion, GitHub und Drive
-  New Social Media Post     – Erstelle einen neuen Social-Media-Post
-  Settings                  – Konfiguriere Einstellungen
-  Exit                      – Beende das Programm
+► New Project               – Create a new project with Notion, GitHub and Drive
+  New Social Media Post     – Add a new social media post to the Notion database
+  Settings                  – Check if API tokens are missing
+  Exit                      – Exit the program
 ```
 
 ### Workflows
 
-#### 1. Neues Projekt erstellen
+#### 1. Create New Project
 
-- Abfrage von Projektdetails
-- Automatische GitHub-Repository-Erstellung
-- Notion-Datenbankeinträge hinzufügen
-- Minecraft Bedrock-Add-On Ordner (optional)
-- Google Drive-Ordner erstellen (derzeit deaktiviert)
+- Query project details
+- Automatic GitHub repository creation
+- Add Notion database entries
+- Minecraft Bedrock add-on folders (optional)
+- Create Google Drive folder (currently disabled)
 
-#### 2. Neuen Social-Media-Post erstellen
+#### 2. Create New Social Media Post
 
-- Post-Details eingeben
-- In Notion speichern
-- Verschiedene Plattformen vorbereiten
+- Enter post details
+- Save to Notion
+- Python script creates a new Excel file in the project root: `Posts.xlsx`
 
-#### 3. Einstellungen
+#### 3. Settings
 
-- Tokens checken
+- Check tokens
 
 ---
 
-## Projektstruktur
+## Project Structure
 
 ```
 CLI-Notion-Tool/
 ├── src/
 │   ├── bin/
-│   │   └── cli.ts                 # Einstiegspunkt
+│   │   └── cli.ts                 # Entry point
 │   ├── cli/
-│   │   ├── index.ts               # Hauptmenü
-│   │   ├── settings.ts            # Einstellungs-Interface
+│   │   ├── index.ts               # Main menu
+│   │   ├── settings.ts            # Settings interface
 │   │   └── flows/
-│   │       ├── projectFlow.ts      # Project-Workflow
-│   │       ├── postFlow.ts         # Social Media Post-Workflow
-│   │       └── minecraftFlow.ts    # Minecraft-Setup
+│   │       ├── projectFlow.ts      # Project workflow
+│   │       ├── postFlow.ts         # Social media post workflow
+│   │       └── minecraftFlow.ts    # Minecraft setup
 │   ├── services/
-│   │   ├── github.ts              # GitHub API-Integration
-│   │   ├── gitops.ts              # Git-Operationen
-│   │   ├── drive/                 # Google Drive-Integration
-│   │   │   ├── auth.ts            # Google OAuth-Authentication
-│   │   │   ├── drive.ts           # Drive API-Operationen
+│   │   ├── github.ts              # GitHub API integration
+│   │   ├── gitops.ts              # Git operations
+│   │   ├── drive/                 # Google Drive integration
+│   │   │   ├── auth.ts            # Google OAuth authentication
+│   │   │   ├── drive.ts           # Drive API operations
 │   │   │   └── credentials.json
-│   │   ├── notion/                # Notion API-Integration
-│   │   │   ├── projectPage.ts     # Notion Project-Seiten
-│   │   │   └── socialMediaPage.ts # Notion Social-Media-Seiten
+│   │   ├── notion/                # Notion API integration
+│   │   │   ├── projectPage.ts     # Notion project pages
+│   │   │   └── socialMediaPage.ts # Notion social media pages
 │   │   └── python/
-│   │       └── exporter.ts        # Python-Script-Integration
+│   │       └── exporter.ts        # Python script integration
 │   ├── types/
-│   │   └── index.ts               # TypeScript-Typdefinitionen
+│   │   └── index.ts               # TypeScript type definitions
 │   ├── utils/
-│   │   └── logger.ts              # Logging-System
-│   ├── config.ts                  # Umgebungskonfiguration
-│   └── constants.ts               # Globale Konstanten
-├── logs/                          # Log-Dateien (generiert)
+│   │   └── logger.ts              # Logging system
+│   ├── config.ts                  # Environment configuration
+│   └── constants.ts               # Global constants
+├── logs/                          # Log files (generated)
 ├── scripts/
 │   └── python/
-│       └── export_to_excel.py     # Excel-Export-Script
-├── dist/                          # Kompilierter JavaScript (generiert)
-├── .env                           # Umgebungsvariablen (lokal)
-├── .gitignore                     # Git-Ignorieregeln
-├── tsconfig.json                  # TypeScript-Konfiguration
-├── package.json                   # npm-Abhängigkeiten
-├── LICENSE.txt                    # Lizenzinfo
-├── CHANGELOG.md                   # Versionshistorie
-└── README.md                      # Diese Datei
+│       └── export_to_excel.py     # Excel export script
+├── dist/                          # Compiled JavaScript (generated)
+├── .env                           # Environment variables (local)
+├── .gitignore                     # Git ignore rules
+├── tsconfig.json                  # TypeScript configuration
+├── .prettierignore                # Prettier ignore rules
+├── .prettierrc.json               # Prettier configuration
+├── eslint.config.mjs              # ESLint configuration                  
+├── package.json                   # npm dependencies
+├── SECURITY.md                    # Security issue reporting rules
+├── CODE_OF_CONDUCT.md             # Code of conduct
+├── LICENSE.txt                    # License information
+├── CHANGELOG.md                   # Version history
+└── README.md                      # This file
 ```
 
 ---
 
-## Häufige Fehler & Lösungen
+## Common Errors & Solutions
 
 ### 1. **"Environment variable X is missing"**
 
-**Problem**: Eine erforderliche Umgebungsvariable wurde nicht gesetzt.
+**Problem**: A required environment variable was not set.
 
-**Lösung**:
+**Solution**:
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Überprüfe die .env-Datei
+# Check the .env file
 cat .env
 
-# Stelle sicher, dass alle erforderlichen Variablen gesetzt sind
-# Siehe Abschnitt "Konfiguration" für die vollständige Liste
+# Make sure all required variables are set
+# See section "Configuration" for the complete list
 ```
 
 **PowerShell (Windows)**
 
 ```powershell
-# Überprüfe die .env-Datei
+# Check the .env file
 Get-Content .env
 
-# Stelle sicher, dass alle erforderlichen Variablen gesetzt sind
-# Siehe Abschnitt "Konfiguration" für die vollständige Liste
+# Make sure all required variables are set
+# See section "Configuration" for the complete list
 ```
 
 ---
 
 ### 2. **"Invalid Notion API Key"**
 
-**Problem**: Der NOTION_KEY ist ungültig oder abgelaufen.
+**Problem**: The NOTION_KEY is invalid or expired.
 
-**Lösung**:
+**Solution**:
 
-- Verwende einen gültigen Internal Integration Token von [notion.com/my-integrations](https://www.notion.com/my-integrations)
-- Stelle sicher, dass die Integration auf die relevanten Datenbanken zugreifen kann
-- Überprüfe, dass die Datenbank in der Integration "shared" ist
+- Use a valid Internal Integration Token from [notion.com/my-integrations](https://www.notion.com/my-integrations)
+- Make sure the integration can access the relevant databases
 
 ---
 
-### 3. **"GitHub Token not valid" oder "API rate limit exceeded"**
+### 3. **"GitHub Token not valid" or "API rate limit exceeded"**
 
-**Problem**: GitHub API-Fehler bei der Repository-Erstellung.
+**Problem**: GitHub API error when creating a repository.
 
-**Lösung**:
+**Solution**:
 
-**Allgemein (alle Systeme)**
+**General (all systems)**
 
 ```
-# Token überprüfen
-# - Token muss `repo` und `user` Scopes haben
-# - Token darf nicht abgelaufen sein
-# - Für Orgs: `admin:org_hook` Scope erforderlich
+# Check token
+# - Token must have `repo` and `user` scopes
+# - Token must not be expired
 
-# Rate-Limiting vermeiden:
-# - GitHub begrenzt auf 5000 Requests/Stunde
-# - Warte eine Stunde oder verwende seltenere Operationen
+# Avoid rate limiting:
+# - GitHub limits to 5000 requests/hour
+# - Wait an hour or use less frequent operations
 ```
 
 ---
 
 ### 4. **"DATABASE_ID not found in Notion"**
 
-**Problem**: Die Notion-Datenbank-ID ist ungültig.
+**Problem**: The Notion database ID is invalid.
 
-**Lösung**:
+**Solution**:
 
-**Allgemein (alle Systeme)**
+**General (all systems)**
 
 ```
-# FORMAT DER ID ÜBERPRÜFEN:
-# - Richtig:   abd123456789abcdef0123456789abcd
-# - Falsch:    abd123456789-abcdef-0123456789abcd (mit Bindestrichen)
+# CHECK ID FORMAT:
+# - Correct:   abd123456789abcdef0123456789abcd
+# - Incorrect: abd123456789-abcdef-0123456789abcd (with hyphens)
 
-# Authentifizierung überprüfen:
-# - Integration muss Zugriff auf die Datenbank haben
-# - Teilbar die Datenbank mit der Integration in Notion
+# Check authentication:
+# - Integration must have access to the database
 ```
 
 ---
 
-### 5. **"Build fehlgeschlagen: TypeScript-Fehler"**
+### 5. **"Build failed: TypeScript error"**
 
-**Problem**: Kompilierungsfehler beim `npm run build`.
+**Problem**: Compilation error during `npm run build`.
 
-**Lösung**:
+**Solution**:
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Fehlerdetails anschauen
+# Check error details
 npm run build
 
-# TypeScript-Checker
+# TypeScript checker
 npx tsc --noEmit
 
-# Abhängigkeiten neu installieren
+# Reinstall dependencies
 rm -rf node_modules package-lock.json
 npm install
 npm run build
@@ -372,13 +374,13 @@ npm run build
 **PowerShell (Windows)**
 
 ```powershell
-# Fehlerdetails anschauen
+# Check error details
 npm run build
 
-# TypeScript-Checker
+# TypeScript checker
 npx tsc --noEmit
 
-# Abhängigkeiten neu installieren
+# Reinstall dependencies
 Remove-Item -Recurse -Force node_modules
 Remove-Item -Force package-lock.json
 npm install
@@ -389,75 +391,75 @@ npm run build
 
 ### 6. **"Google Drive Service is disabled"**
 
-**Problem**: Google Drive-Integration funktioniert nicht.
+**Problem**: Google Drive integration is not working.
 
-**Aktueller Status**: ℹ️ Die Google Drive-Integration ist in v1.0.0 deaktiviert. Sie wird in einer zukünftigen Version aktiviert.
+**Current Status**: ℹ️ Google Drive integration is disabled in v1.0.0. It will be enabled in a future version.
 
 ---
 
 ### 7. **"ENOENT: no such file or directory, open '.env'"**
 
-**Problem**: .env-Datei fehlt.
+**Problem**: .env file is missing.
 
-**Lösung**:
+**Solution**:
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Erstelle die .env-Datei
+# Create the .env file
 touch .env
 
-# Oder kopiere von einem Template
+# Or copy from a template
 cp .env.example .env
 
-# Bearbeite die Datei mit deinen API-Keys
-# (Nutze einen Editor wie VSCode, etc.)
+# Edit the file with your API keys
+# (Use an editor like VSCode, etc.)
 ```
 
 **PowerShell (Windows)**
 
 ```powershell
-# Erstelle die .env-Datei (ist leer wenn nicht vorhanden)
+# Create the .env file (empty if not present)
 New-Item -Name ".env" -ItemType "file" -Force
 
-# Oder kopiere von einem Template
+# Or copy from a template
 Copy-Item -Path .env.example -Destination .env -Force
 
-# Bearbeite die Datei mit deinen API-Keys
-# (Nutze einen Editor wie VSCode, notepad++, etc.)
+# Edit the file with your API keys
+# (Use an editor like VSCode, notepad++, etc.)
 ```
 
 ---
 
 ### 8. **"Python script not found"**
 
-**Problem**: Das Python-Export-Script wird nicht gefunden.
+**Problem**: The Python export script is not found.
 
-**Lösung**:
+**Solution**:
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Überprüfe, ob Python installiert ist
+# Check if Python is installed
 python --version
 
-# Überprüfe den Pfad zum Script
+# Check the path to the script
 ls scripts/python/export_to_excel.py
 
-# Stelle sicher, dass die erforderlichen Python-Packages installiert sind
+# Make sure the required Python packages are installed
 pip install pandas openpyxl
 ```
 
 **PowerShell (Windows)**
 
 ```powershell
-# Überprüfe, ob Python installiert ist
+# Check if Python is installed
 python --version
 
-# Überprüfe den Pfad zum Script
+# Check the path to the script
 Test-Path scripts\python\export_to_excel.py
 
-# Stelle sicher, dass die erforderlichen Python-Packages installiert sind
+# Make sure the required Python packages are installed
 pip install pandas openpyxl
 ```
 
@@ -465,17 +467,17 @@ pip install pandas openpyxl
 
 ### 9. **"Cannot find module '@notionhq/client'"**
 
-**Problem**: Notion-Abhängigkeit ist nicht installiert.
+**Problem**: Notion dependency is not installed.
 
-**Lösung**:
+**Solution**:
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
 ```bash
-# Installiere alle Abhängigkeiten erneut
+# Reinstall all dependencies
 npm install
 
-# Oder gezielt die Notion-Abhängigkeit
+# Or specifically the Notion dependency
 npm install @notionhq/client
 ```
 
@@ -483,54 +485,54 @@ npm install @notionhq/client
 
 ### 10. **"Git command not found"**
 
-**Problem**: Git ist nicht installiert oder nicht im PATH.
+**Problem**: Git is not installed or not in PATH.
 
-**Lösung**:
+**Solution**:
 
-- [Git installieren](https://git-scm.com/downloads)
-- System neu starten (damit PATH aktualisiert wird)
-- Überprüfe: `git --version`
+- [Install Git](https://git-scm.com/downloads)
+- Restart system (to update PATH)
+- Verify: `git --version`
 
 ---
 
 ## Debugging
 
-### 1. **Logs ansehen**
+### 1. **View Logs**
 
-Das Tool erstellt Logs im `logs/`-Verzeichnis:
+The tool creates logs in the `logs/` directory:
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Neueste Logs anschauen
+# View latest logs
 ls -lrt logs/
 
-# Log-Datei öffnen und live verfolgen
+# Open and monitor log file in real-time
 tail -f logs/Notion-CLI-*.log
 ```
 
 **PowerShell (Windows)**
 
 ```powershell
-# Neueste Logs anschauen
+# View latest logs
 Get-ChildItem -Path logs/ | Sort-Object LastWriteTime | Select-Object -Last 5
 
-# Log-Datei öffnen und live verfolgen
+# Open and monitor log file in real-time
 Get-Content -Path logs/Notion-CLI-*.log -Wait
 ```
 
-Log-Dateien sind benannt als: `Notion-CLI-YYYY-MM-DD.log`
+Log files are named as: `Notion-CLI-YYYY-Www.log`
 
-Diese sind auf 5 MB begrenzt und werden automatisch rotiert.
+These are limited to 5 MB and are automatically rotated.
 
 ---
 
-### 2. **Umgebungsvariablen überprüfen**
+### 2. **Check Environment Variables**
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Alle gesetzten Variablen anzeigen
+# Display all set variables
 env | grep NOTION
 env | grep GITHUB
 env | grep DATABASE
@@ -541,42 +543,42 @@ env | grep DRIVE
 **PowerShell (Windows)**
 
 ```powershell
-# Umgebungsvariablen anzeigen (einzeln)
+# Display environment variables (individually)
 Get-ChildItem -Path Env:NOTION_KEY
 Get-ChildItem -Path Env:GITHUB_TOKEN
 Get-ChildItem -Path Env:DATABASE_ID
 
-# Oder alle mit Filter anzeigen
+# Or display all with filter
 Get-ChildItem -Path Env: | Where-Object {$_.Name -like "NOTION*" -or $_.Name -like "GITHUB*" -or $_.Name -like "DATABASE*" -or $_.Name -like "GOOGLE*" -or $_.Name -like "DRIVE*"}
 ```
 
 ---
 
-### 3. **API-Verbindungen testen**
+### 3. **Check API Tokens**
 
-Nutze das Settings-Menü zum Testen der Integrationen:
+Use the Settings menu to test API tokens:
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
 ```bash
 npm start
-# → Settings → Connection Tests
+# → Settings 
 ```
 
 ---
 
-### 4. **TypeScript-Fehler beheben**
+### 4. **Fix TypeScript Errors**
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Überprüfe auf Fehler ohne zu kompilieren
+# Check for errors without compiling
 npx tsc --noEmit
 
-# Repariere automatisch
+# Repair automatically
 npx tsc --noEmit --pretty
 
-# Baue neu mit Clean-Build
+# Rebuild with clean build
 rm -rf dist
 npm run build
 ```
@@ -584,22 +586,22 @@ npm run build
 **PowerShell (Windows)**
 
 ```powershell
-# Überprüfe auf Fehler ohne zu kompilieren
+# Check for errors without compiling
 npx tsc --noEmit
 
-# Repariere automatisch
+# Repair automatically
 npx tsc --noEmit --pretty
 
-# Baue neu mit Clean-Build
+# Rebuild with clean build
 Remove-Item -Recurse -Force dist
 npm run build
 ```
 
 ---
 
-### 5. **Detaillierte Fehlersuche**
+### 5. **Detailed Error Investigation**
 
-Führe das Programm mit Node-Debug aus:
+Run the program with Node debug:
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
@@ -607,117 +609,115 @@ Führe das Programm mit Node-Debug aus:
 node --inspect dist/bin/cli.js
 ```
 
-Dann öffne `chrome://inspect` in Chrome DevTools.
+Then open `chrome://inspect` in Chrome DevTools.
 
 ---
 
-### 6. **Package.json-Scripts verstehen**
+### 6. **Understand package.json Scripts**
 
 **Shell (Bash/Zsh – Linux/macOS) & PowerShell (Windows)**
 
 ```bash
-# Kompiliere TypeScript zu JavaScript
+# Compile TypeScript to JavaScript
 npm run build
 
-# Starte das kompilierte Programm
+# Start the compiled program
 npm start
 
-# Tests ausführen (derzeit nicht implementiert)
+# Run tests (currently not implemented)
 npm test
 
-# Alternative: Direktes Launch mit ts-node
+# Alternative: Direct launch with ts-node
 npx ts-node src/bin/cli.ts
 ```
 
 ---
 
-### 7. **Wenn alles andere fehlschlägt**
+### 7. **If Everything Else Fails**
 
 **Shell (Bash/Zsh – Linux/macOS)**
 
 ```bash
-# Vollständiger Clean-Setup
+# Complete clean setup
 rm -rf node_modules dist package-lock.json
 npm install
 npm run build
 
-# Überprüfe die .env-Datei (alle erforderlichen Variablen?)
+# Check the .env file (all required variables?)
 cat .env
 
-# Starte das Tool
+# Start the tool
 npm start
 ```
 
 **PowerShell (Windows)**
 
 ```powershell
-# Vollständiger Clean-Setup
+# Complete clean setup
 Remove-Item -Recurse -Force node_modules
 Remove-Item -Recurse -Force dist
 Remove-Item -Force package-lock.json
 npm install
 npm run build
 
-# Überprüfe die .env-Datei (alle erforderlichen Variablen?)
+# Check the .env file (all required variables?)
 Get-Content .env
 
-# Starte das Tool
+# Start the tool
 npm start
 ```
 
 ---
 
-## Lizenz
+## License
 
-Dieses Projekt wird unter der **Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** Lizenz veröffentlicht.
+This project is published under the **Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
 
-**Zusammenfassung**:
+**Summary**:
 
-- ✅ **Kostenlos nutzbar** für private und nicht-kommerzielle Zwecke
-- ✅ **Änderungen erlaubt** – Adaptierungen sind möglich
-- ✅ **Quellangabe erforderlich** – Der Urheber muss genannt werden
-- ❌ **Kommerzielle Nutzung verboten** – Nicht für gewerbliche Zwecke
-- ❌ **Keine Sublizenzierung** – Darf nicht unter anderen Lizenzen weitergegeben werden
+- ✅ **Free to use** for private and non-commercial purposes
+- ✅ **Modifications allowed** – Adaptations are possible
+- ✅ **Attribution required** – The creator must be credited
+- ❌ **Commercial use prohibited** – Cannot be used for commercial purposes
+- ❌ **No sublicensing** – Cannot be redistributed under other licenses
 
-Vollständige Lizenz-Details: [LICENSE.txt](./LICENSE.txt)
+Full license details: [LICENSE.txt](./LICENSE.txt)
 
 ---
 
 ## Changelog
 
-Das komplette Changelog mit allen Versionen, Features und Bugfixes ist in [CHANGELOG.md](./CHANGELOG.md) dokumentiert.
+The complete changelog with all versions, features, and bugfixes is documented in [CHANGELOG.md](./CHANGELOG.md).
 
-### Aktuelle Version (1.0.0)
+### Current Version (1.0.0)
 
-**Release**: 10. Februar 2026
+**Release**: February 12, 2026
 
 **Added**:
 
-- GitHub-Repository-Automatisierung
-- Notion-Seiten-Integration
-- Minecraft Bedrock-Projekt-Struktur
-- Interaktives CLI-Menü
-- Logging-System
+- GitHub repository automation
+- Notion page integration
+- Minecraft Bedrock BP & RP folders
+- Interactive CLI menu
+- Logging system
 
-**In Progress / Geplant**:
+**In Progress / Planned**:
 
-- Google Drive-Integration (aktuell deaktiviert)
-- Excel-Export-Funktionen
-- Ausführliche Tests
+- Google Drive integration (currently disabled)
+- Comprehensive tests
 
-Siehe [CHANGELOG.md](./CHANGELOG.md) für weitere Informationen.
+See [CHANGELOG.md](./CHANGELOG.md) for more information.
 
 ---
 
-## Support & Beiträge
+## Support & Contributions
 
-**Fehler gefunden?**  
-Hinweise und Improvements sind willkommen. Schau in [CONTRIBUTING.md](./CONTRIBUTING.md) für Richtlinien.
+**Found a bug?**  
+Suggestions and improvements are welcome. Check [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-**Sicherheitsbedenken?**  
-Sieh [SECURITY.md](./SECURITY.md) für Richtlinien zur verantwortungsvollen Offenlegung.
+**Security concerns?**  
+See [SECURITY.md](./SECURITY.md) for responsible disclosure guidelines.
 
 ---
 
 **Happy automating! 🚀**
-
