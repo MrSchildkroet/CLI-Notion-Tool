@@ -36,6 +36,7 @@ export async function showMainMenu(): Promise<void> {
         { name: "New Project", value: "new" },
         { name: "New Social Media Post", value: "social_media" },
         { name: "Settings", value: "settings" },
+        new inquirer.Separator(),
         { name: "Exit", value: "exit" },
       ],
     },
