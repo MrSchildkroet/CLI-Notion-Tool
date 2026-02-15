@@ -112,6 +112,18 @@ The tool provides an interactive CLI menu interface that allows users to manage 
 
 ## Configuration
 
+### Location of the .env file
+
+For a **global installation** (npm install -g .):
+
+- Windows: `C:\Users\<YOUR_USER>\.notionCli\.env`
+- Linux/macOS: `~/.notionCli/.env`
+
+For **local/project installation** (npm start in the project root):
+
+- Place `.env` in your project root directory.
+
+
 ### Required Environment Variables
 
 The `.env` file must contain the following variables:
