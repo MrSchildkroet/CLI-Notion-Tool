@@ -1,9 +1,25 @@
 import path from "path";
+import fs from "fs";
+import os from "os";
 
+import chalk from "chalk";
 import dotenv from "dotenv";
 
+const configDir = path.join(os.homedir(), ".notionCli");
+
+if (!fs.existsSync(configDir)) {
+  fs.mkdirSync(configDir, { recursive: true });
+}
+
+const envPath = path.join(configDir, ".env");
+
+if (!fs.existsSync(envPath)) {
+  console.log(chalk.red(".env is missing."));
+  process.exit(1);
+}
+
 dotenv.config({
-  path: path.resolve(process.cwd(), ".env"),
+  path: envPath,
 });
 
 interface Config {
